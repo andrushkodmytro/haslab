@@ -4,12 +4,13 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-
+import {useDispatch} from 'react-redux'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
+import {registrationRequest} from 'page/SignUp/registrationReducer'
 
 const useStyles = makeStyles((theme) => ({
   loginPage: {
@@ -26,14 +27,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-
   const classes = useStyles();
+  const dispatch = useDispatch()
+
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    
+    
+    const { email, password, firstName, lastName } = e.target;
+
+    const data = { email: email.value, password: password.value, firstName:firstName.value, lastName:lastName.value };
+
+    dispatch(registrationRequest(data))
+  };
   return (
     <Container maxWidth='xs' className={classes.loginPage}>
     <Typography component='h1' variant='h5'>
       Registration
     </Typography>
-      <form className={classes.form} noValidate>
+      <form className={classes.form} noValidate onSubmit={registerHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
