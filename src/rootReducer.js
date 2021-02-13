@@ -1,8 +1,9 @@
-import { combineReducers } from 'redux';
 import { reducer as registration } from 'page/SignUp/registrationReducer';
 import { reducer as signIn } from 'page/Login/loginReducer';
+import { reducer as account } from 'page/Account/accountReducer';
 
-export default combineReducers({
+export const rootReducer = {
+  account,
   registration,
   signIn,
-});
+};

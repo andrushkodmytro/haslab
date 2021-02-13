@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Container from 'components/ui/Container';
 import { Switch, FormControlLabel } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link as RouterLink } from 'react-router-dom';
@@ -15,6 +14,7 @@ import { useSelector } from 'react-redux';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { RootState } from 'store';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme) =>
     navLink: {
       color: 'red',
     },
-    themeToggle:{
-      marginLeft: 0
-    }
+    themeToggle: {
+      marginLeft: 0,
+    },
   })
 );
 
@@ -45,7 +45,7 @@ export default function Header({ toggleDarkMode }: HeaderProps) {
 
   let history = useHistory();
 
-  const { loggedIn } = useSelector((state: any) => state.signIn);
+  const { loggedIn } = useSelector((state: RootState) => state.signIn);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -107,7 +107,12 @@ export default function Header({ toggleDarkMode }: HeaderProps) {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={accountHandler}>My account</MenuItem>
                 <MenuItem>
-                  <FormControlLabel className={classes.themeToggle} control={<Switch onClick={toggleDarkMode} />} label={`Toggle Dark Mode`} labelPlacement="start" />
+                  <FormControlLabel
+                    className={classes.themeToggle}
+                    control={<Switch onClick={toggleDarkMode} />}
+                    label={`Toggle Dark Mode`}
+                    labelPlacement='start'
+                  />
                 </MenuItem>
                 <MenuItem onClick={logOutHandler}>Logout</MenuItem>
               </Menu>

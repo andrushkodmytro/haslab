@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { themeObject } from 'theme/theme';
-import {ThemeOptions} from '@material-ui/core'
+import { ThemeOptions } from '@material-ui/core';
 
 export default function useDarkMode() {
-  const [theme, setTheme] = useState<ThemeOptions >(themeObject);
+  const [theme, setTheme] = useState<ThemeOptions>(themeObject);
 
-  const {
-    palette
-  } = theme;
+  const { palette } = theme;
 
   const toggleDarkMode = () => {
     const updatedTheme: any = {
@@ -19,5 +17,5 @@ export default function useDarkMode() {
     };
     setTheme(updatedTheme);
   };
-  return {theme, toggleDarkMode};
+  return { theme, toggleDarkMode };
 }

@@ -42,8 +42,7 @@ export default function Login() {
     const { from } = location.state || { from: { pathname: '/' } };
     dispatch(loginRequest({ data, from }));
   };
-  const { from } = location;
-  console.log(location);
+
   return (
     <Container maxWidth='xs' className={classes.loginPage}>
       <Typography component='h1' variant='h5'>

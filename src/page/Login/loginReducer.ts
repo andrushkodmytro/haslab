@@ -1,6 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import store from 'store2';
 
-let auth = JSON.parse(localStorage.getItem('auth'));
+let auth: any = {};
+try {
+  auth = store.get('auth');
+} catch (e) {
+  console.log(e);
+}
+
 const initialState = auth
   ? { loggedIn: true, user: auth.user, loading: false }
   : { loggedIn: false, user: null, loading: false };
@@ -18,7 +25,7 @@ const counterSlice = createSlice({
       state.loading = false;
     },
     loginRequestError: (state) => {
-      state = state;
+      // state = state;
     },
   },
 });

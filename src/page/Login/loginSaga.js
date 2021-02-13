@@ -7,7 +7,7 @@ import store from 'store2';
 export function* login(action) {
   try {
     console.log('saga');
-    const { data, from } = action.payload;
+    const { data } = action.payload;
     const response = yield call(loginApi, data);
 
     const auth = {

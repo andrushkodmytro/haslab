@@ -5,7 +5,6 @@ import Routes from './Routes/Routes';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useDarkMode from 'hooks/useDarkMode';
-import { Switch, FormControlLabel } from '@material-ui/core';
 import './App.css';
 
 function App() {

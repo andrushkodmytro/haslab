@@ -1,4 +1,9 @@
-import { all, put, call, takeLatest } from 'redux-saga/effects';
+import {
+  all,
+  //  put,
+  call,
+  takeLatest,
+} from 'redux-saga/effects';
 import {
   registrationRequest,
   registrationRequestSuccess,
@@ -6,13 +11,13 @@ import {
 } from 'page/SignUp/registrationReducer';
 import { registrationApi } from 'requests/registration';
 
-import store from 'store2';
+// import store from 'store2';
 
 export function* registration(action) {
   try {
-    const response = yield call(registrationApi, action.payload);
+    yield call(registrationApi, action.payload);
     console.log('Registered');
-    yield registrationRequestFail();
+    yield registrationRequestSuccess();
   } catch (e) {
     yield registrationRequestFail(e.message);
   }
