@@ -5,5 +5,5 @@ import registrationSaga from 'page/SignUp/registrationSaga';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
-  yield all([ registrationSaga,loginSaga ]);
+  yield all([registrationSaga, loginSaga]);
 }

@@ -7,8 +7,8 @@ import store from 'store2';
 export function* login(action) {
   try {
     console.log('saga');
-    const {data, from} = action.payload
-    const response = yield call(loginApi,data);
+    const { data, from } = action.payload;
+    const response = yield call(loginApi, data);
 
     const auth = {
       user: response.data.user,
@@ -18,10 +18,9 @@ export function* login(action) {
     store.set('auth', auth);
 
     yield put(loginRequestSuccess(response.data.user));
-    
   } catch (error) {
     yield put(loginRequestError(error?.response?.data?.errors));
   }
 }
 
-export default all([ takeLatest(loginRequest().type, login) ]);
+export default all([takeLatest(loginRequest().type, login)]);

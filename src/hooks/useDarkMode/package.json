@@ -1,1 +1,3 @@
-{"main": "useDarkMode.js"}
+{
+  "main": "useDarkMode.ts"
+}

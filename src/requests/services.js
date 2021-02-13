@@ -27,11 +27,10 @@ class Service {
     //   Object.assign(config.headers, auth.headers);
     // }
 
-
     const auth = store.get('auth');
-    
-    if(auth?.token){
-      Object.assign(config.headers, {'Authorization': `Bearer ${auth.token}`});
+
+    if (auth?.token) {
+      Object.assign(config.headers, { Authorization: `Bearer ${auth.token}` });
     }
 
     return config;
@@ -99,7 +98,11 @@ class Service {
           return qs.stringify(params, { arrayFormat: 'brackets' });
         },
         responseType: 'json',
-        transformResponse: [(data) => { return data; }],
+        transformResponse: [
+          (data) => {
+            return data;
+          },
+        ],
       })
       .then((response) => {
         return response;
@@ -146,7 +149,6 @@ class Service {
   // }
 
   post(path, payload, onUploadProgress, signIn) {
-    
     return this.service
       .request({
         method: 'POST',

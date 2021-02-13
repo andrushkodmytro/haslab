@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Container from 'components/ui/Container';
 import { Switch, FormControlLabel } from '@material-ui/core';
@@ -30,20 +30,27 @@ const useStyles = makeStyles((theme) =>
     navLink: {
       color: 'red',
     },
+    themeToggle:{
+      marginLeft: 0
+    }
   })
 );
 
-export default function Header({ toggleDarkMode }) {
+interface HeaderProps {
+  toggleDarkMode: () => void;
+}
+
+export default function Header({ toggleDarkMode }: HeaderProps) {
   const classes = useStyles();
 
   let history = useHistory();
 
-  const { loggedIn } = useSelector((state) => state.signIn);
+  const { loggedIn } = useSelector((state: any) => state.signIn);
 
-  const [ anchorEl, setAnchorEl ] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const handleMenu = (event) => {
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -58,10 +65,6 @@ export default function Header({ toggleDarkMode }) {
 
   const logOutHandler = () => {
     handleClose();
-  };
-
-  const onLogin = () => {
-    history.push('/login');
   };
 
   return (
@@ -103,8 +106,8 @@ export default function Header({ toggleDarkMode }) {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={accountHandler}>My account</MenuItem>
-                <MenuItem onClick={accountHandler}>
-                  <FormControlLabel control={<Switch onClick={toggleDarkMode} label={`Toggle Dark Mode`} />} />
+                <MenuItem>
+                  <FormControlLabel className={classes.themeToggle} control={<Switch onClick={toggleDarkMode} />} label={`Toggle Dark Mode`} labelPlacement="start" />
                 </MenuItem>
                 <MenuItem onClick={logOutHandler}>Logout</MenuItem>
               </Menu>

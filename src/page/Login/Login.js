@@ -4,15 +4,13 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 import { loginRequest } from 'page/Login/loginReducer';
-
-
 
 const useStyles = makeStyles((theme) => ({
   loginPage: {
@@ -31,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const location = useLocation();
 
   const loginHandler = (e) => {
@@ -41,11 +39,11 @@ export default function Login() {
 
     const data = { email: email.value, password: password.value };
 
-    const { from } = location.state || { from: { pathname: "/" } };
-    dispatch(loginRequest({data, from }));
+    const { from } = location.state || { from: { pathname: '/' } };
+    dispatch(loginRequest({ data, from }));
   };
-  const {from}= location
-console.log(location)
+  const { from } = location;
+  console.log(location);
   return (
     <Container maxWidth='xs' className={classes.loginPage}>
       <Typography component='h1' variant='h5'>

@@ -12,16 +12,16 @@ const counterSlice = createSlice({
   },
   reducers: {
     registrationRequest: (state) => {
-     state.loading = true
+      state.loading = true;
     },
     registrationRequestSuccess: (state) => {
-      state.loading = false
+      state.loading = false;
     },
     registrationRequestFail: (state) => {
-      state.loading = false
+      state.loading = false;
     },
   },
 });
 
 export const { reducer } = counterSlice;
-export const { registrationRequest, registrationRequestSuccess, registrationRequestFail} = counterSlice.actions;
+export const { registrationRequest, registrationRequestSuccess, registrationRequestFail } = counterSlice.actions;
