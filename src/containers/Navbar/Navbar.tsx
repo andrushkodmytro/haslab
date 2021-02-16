@@ -2,19 +2,16 @@ import React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Collapse from '@material-ui/core/Collapse';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
+import Toolbar from '@material-ui/core/Toolbar';
 
 const drawerWidth = 240;
 
@@ -23,10 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: 'flex',
     },
-    appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
+
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
@@ -34,11 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth,
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
+    drawerContainer: {
+      overflow: 'auto',
+    },
     content: {
       flexGrow: 1,
-      backgroundColor: theme.palette.background.default,
       padding: theme.spacing(3),
     },
     nested: {
@@ -69,7 +63,7 @@ export default function Navbar() {
       }}
       anchor='left'
     >
-      <div className={classes.toolbar} />
+      <Toolbar />
 
       <ListItem button onClick={productHandler}>
         <ListItemIcon>

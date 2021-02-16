@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createCompanyRequest } from 'page/CompanyCreate/companyCreateReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm, Controller } from 'react-hook-form';
-import { EMAIL_REGEX } from 'utils/constants';
+// import { EMAIL_REGEX } from 'utils/constants';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CompanyCreate() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { handleSubmit, control, errors, setValue } = useForm();
+  const { handleSubmit, control, errors } = useForm();
 
   const account = useSelector((state: RootState) => state.account);
 
