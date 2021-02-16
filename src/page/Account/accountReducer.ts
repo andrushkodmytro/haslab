@@ -30,8 +30,28 @@ const counterSlice = createSlice({
     getAccountRequestFail: (state) => {
       state.loading = false;
     },
+
+    uploadLogoRequest: (state, action) => {
+      state.loading = true;
+    },
+    uploadLogoRequestSuccess: (state, { payload }) => {
+      state.firstName = payload.firstName;
+      state.lastName = payload.lastName;
+      state.email = payload.email;
+      state.loading = false;
+    },
+    uploadLogoRequestFail: (state) => {
+      state.loading = false;
+    },
   },
 });
 
 export const { reducer } = counterSlice;
-export const { getAccountRequest, getAccountRequestSuccess, getAccountRequestFail } = counterSlice.actions;
+export const {
+  getAccountRequest,
+  getAccountRequestSuccess,
+  getAccountRequestFail,
+  uploadLogoRequest,
+  uploadLogoRequestSuccess,
+  uploadLogoRequestFail,
+} = counterSlice.actions;

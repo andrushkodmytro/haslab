@@ -58,6 +58,11 @@ export default function Header({ toggleDarkMode }: HeaderProps) {
     setAnchorEl(null);
   };
 
+  const companyHandler = () => {
+    handleClose();
+    history.push('/company');
+  };
+
   const accountHandler = () => {
     handleClose();
     history.push('/account');
@@ -104,8 +109,8 @@ export default function Header({ toggleDarkMode }: HeaderProps) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={accountHandler}>My account</MenuItem>
+                <MenuItem onClick={companyHandler}>Company</MenuItem>
+                <MenuItem onClick={accountHandler}>Account</MenuItem>
                 <MenuItem>
                   <FormControlLabel
                     className={classes.themeToggle}

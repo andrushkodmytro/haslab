@@ -5,6 +5,8 @@ import Routes from './Routes/Routes';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import useDarkMode from 'hooks/useDarkMode';
+import history from '../historyHelper';
+import { ConnectedRouter } from 'connected-react-router';
 import './App.css';
 
 function App() {
@@ -14,13 +16,13 @@ function App() {
 
   return (
     <ThemeProvider theme={themeConfig}>
-      <Router>
+      <ConnectedRouter history={history}>
         <CssBaseline />
 
         <Header toggleDarkMode={toggleDarkMode} />
 
         <Routes />
-      </Router>
+      </ConnectedRouter>
     </ThemeProvider>
   );
 }

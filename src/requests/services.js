@@ -32,7 +32,6 @@ class Service {
     if (auth?.token) {
       Object.assign(config.headers, { Authorization: `Bearer ${auth.token}` });
     }
-
     return config;
   }
 
