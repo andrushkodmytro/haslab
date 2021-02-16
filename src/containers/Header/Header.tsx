@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Container from 'components/ui/Container';
 import { Switch, FormControlLabel } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -18,6 +17,9 @@ import { RootState } from 'store';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+    },
     root: {
       flexGrow: 1,
     },
@@ -73,62 +75,60 @@ export default function Header({ toggleDarkMode }: HeaderProps) {
   };
 
   return (
-    <AppBar position='static'>
-      <Container maxWidth='lg'>
-        <Toolbar>
-          <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' className={classes.title}>
-            News
-          </Typography>
+    <AppBar position='fixed' className={classes.appBar}>
+      <Toolbar>
+        <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
+          <MenuIcon />
+        </IconButton>
+        <Typography variant='h6' className={classes.title}>
+          News
+        </Typography>
 
-          {loggedIn ? (
-            <div>
-              <IconButton
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
-                color='inherit'
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={companyHandler}>Company</MenuItem>
-                <MenuItem onClick={accountHandler}>Account</MenuItem>
-                <MenuItem>
-                  <FormControlLabel
-                    className={classes.themeToggle}
-                    control={<Switch onClick={toggleDarkMode} />}
-                    label={`Toggle Dark Mode`}
-                    labelPlacement='start'
-                  />
-                </MenuItem>
-                <MenuItem onClick={logOutHandler}>Logout</MenuItem>
-              </Menu>
-            </div>
-          ) : (
-            <Link component={RouterLink} className={classes.navLink} to='/login'>
-              Login
-            </Link>
-          )}
-        </Toolbar>
-      </Container>
+        {loggedIn ? (
+          <div>
+            <IconButton
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleMenu}
+              color='inherit'
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={companyHandler}>Company</MenuItem>
+              <MenuItem onClick={accountHandler}>Account</MenuItem>
+              <MenuItem>
+                <FormControlLabel
+                  className={classes.themeToggle}
+                  control={<Switch onClick={toggleDarkMode} />}
+                  label={`Toggle Dark Mode`}
+                  labelPlacement='start'
+                />
+              </MenuItem>
+              <MenuItem onClick={logOutHandler}>Logout</MenuItem>
+            </Menu>
+          </div>
+        ) : (
+          <Link component={RouterLink} className={classes.navLink} to='/login'>
+            Login
+          </Link>
+        )}
+      </Toolbar>
     </AppBar>
   );
 }
