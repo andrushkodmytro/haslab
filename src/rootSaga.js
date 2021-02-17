@@ -4,8 +4,9 @@ import loginSaga from 'page/Login/loginSaga';
 import companyCreateSaga from 'page/CompanyCreate/companyCreateSaga';
 import productCreateSaga from 'page/ProductCreate/productCreateSaga';
 import registrationSaga from 'page/SignUp/registrationSaga';
+import productsPreviewSaga from 'page/ProductsPreview/productsPreviewSaga';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
-  yield all([registrationSaga, loginSaga, accountSaga, companyCreateSaga, productCreateSaga]);
+  yield all([registrationSaga, loginSaga, accountSaga, companyCreateSaga, productCreateSaga, productsPreviewSaga]);
 }

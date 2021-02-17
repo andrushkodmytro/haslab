@@ -44,7 +44,7 @@ export default function ProductCreate() {
     dispatch(createProductRequest({ ...data, companyId }));
   };
 
-  const { name: nameError, price: priceError, description: descriptionError } = errors;
+  const { name: nameError, price: priceError, description: descriptionError, unit: unitError } = errors;
   return (
     <Container maxWidth='sm'>
       <Typography component='h1' variant='h5'>
@@ -100,6 +100,22 @@ export default function ProductCreate() {
                 label='Description'
                 error={!!descriptionError}
                 helperText={!!descriptionError && descriptionError?.message}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                as={TextField}
+                control={control}
+                rules={{ required: { value: true, message: 'Unit name is required' } }}
+                defaultValue=''
+                name='unit'
+                variant='outlined'
+                // required
+                fullWidth
+                label='Unit'
+                error={!!unitError}
+                helperText={!!unitError && unitError?.message}
               />
             </Grid>
           </Grid>

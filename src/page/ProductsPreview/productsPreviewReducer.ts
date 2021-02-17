@@ -1,34 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface initialStateType {
-  firstName: string;
-  // lastName: string;
-  // email: string;
-  loading: boolean;
+  products: { data: [] | any[] };
+  isFirstLoading: boolean;
+  isLoading: boolean;
 }
 
 const initialState = {
-  // firstName: '',
-  // lastName: '',
-  // email: '',
-  loading: false,
+  products: {
+    data: [],
+  },
+  isFirstLoading: false,
+  isLoading: false,
 };
 
 const counterSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    getAccountRequest: (state) => {
-      state.loading = true;
+    getAllProductsRequest: (state) => {
+      state.isLoading = true;
     },
-    getAccountRequestSuccess: (state, { payload }) => {
-      state.loading = false;
+    getAllProductsRequestSuccess: (state, { payload }) => {
+      state.isLoading = false;
+      state.products = payload;
     },
-    getAccountRequestFail: (state) => {
-      state.loading = false;
+    getAllProductsRequestFail: (state) => {
+      state.isLoading = false;
     },
   },
 });
 
 export const { reducer } = counterSlice;
-export const { getAccountRequest, getAccountRequestSuccess, getAccountRequestFail } = counterSlice.actions;
+export const { getAllProductsRequest, getAllProductsRequestSuccess, getAllProductsRequestFail } = counterSlice.actions;
