@@ -5,12 +5,14 @@ import {
   createProductRequestFail,
 } from 'page/ProductCreate/productCreateReducer';
 import { createProductApi } from './productCreateApi';
+import history from 'historyHelper';
 
 export function* createProduct({ payload }: any) {
   try {
     yield call(createProductApi, payload);
 
     yield put(createProductRequestSuccess());
+    history.push('/products');
   } catch (error) {
     yield put(createProductRequestFail());
   }

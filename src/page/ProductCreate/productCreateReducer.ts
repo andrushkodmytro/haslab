@@ -29,8 +29,9 @@ const counterSlice = createSlice({
     createProductRequestFail: (state) => {
       state.isLoading = false;
     },
+    resetCreateProductPage: () => initialState,
   },
 });
 
 export const { reducer } = counterSlice;
-export const { createProductRequest, createProductRequestSuccess, createProductRequestFail } = counterSlice.actions;
+export const { createProductRequest, createProductRequestSuccess, createProductRequestFail,resetCreateProductPage } = counterSlice.actions;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from 'components/ui/Container/Container';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import { createProductRequest } from './productCreateReducer';
+import { createProductRequest, resetCreateProductPage } from './productCreateReducer';
 import { useDispatch } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -35,6 +35,12 @@ export default function ProductCreate() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCreateProductPage());
+    };
+  }, [dispatch]);
 
   const { handleSubmit, control, errors } = useForm();
 
@@ -107,7 +113,7 @@ export default function ProductCreate() {
               <Controller
                 as={TextField}
                 control={control}
-                rules={{ required: { value: true, message: 'Unit name is required' } }}
+                // rules={{ required: { value: true, message: 'Unit name is required' } }}
                 defaultValue=''
                 name='unit'
                 variant='outlined'

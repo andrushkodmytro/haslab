@@ -18,6 +18,7 @@ const counterSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
+    resetProductPreviewPage: () => initialState,
     getAllProductsRequest: (state) => {
       state.isLoading = true;
     },
@@ -32,4 +33,9 @@ const counterSlice = createSlice({
 });
 
 export const { reducer } = counterSlice;
-export const { getAllProductsRequest, getAllProductsRequestSuccess, getAllProductsRequestFail } = counterSlice.actions;
+export const {
+  resetProductPreviewPage,
+  getAllProductsRequest,
+  getAllProductsRequestSuccess,
+  getAllProductsRequestFail,
+} = counterSlice.actions;

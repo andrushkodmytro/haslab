@@ -10,7 +10,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllProductsRequest } from './productsPreviewReducer';
+import { resetProductPreviewPage, getAllProductsRequest } from './productsPreviewReducer';
 import { RootState } from 'store';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -43,10 +43,15 @@ const rows = [
 export default function Product() {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const { products, isLoading, isFirstLoading } = useSelector((state: RootState) => state.productsPreview);
-  console.log(products);
+
   useEffect(() => {
     dispatch(getAllProductsRequest());
+
+    return () => {
+      dispatch(resetProductPreviewPage());
+    };
   }, [dispatch]);
 
   return (
@@ -73,7 +78,7 @@ export default function Product() {
                   {row.name}
                 </TableCell>
                 <TableCell align='right'>{row.unit}</TableCell>
-                <TableCell align='right'>{row.price}</TableCell>
+                <TableCell align='right'>{(row.price || 0) / 100}</TableCell>
                 <TableCell align='right'>{row.description}</TableCell>
                 <TableCell align='right'>{row.createdAt}</TableCell>
                 <TableCell align='right'>{row.updatedAt}</TableCell>
