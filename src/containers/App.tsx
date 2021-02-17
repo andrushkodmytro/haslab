@@ -7,9 +7,27 @@ import useDarkMode from 'hooks/useDarkMode';
 import history from '../historyHelper';
 import { ConnectedRouter } from 'connected-react-router';
 import Navbar from './Navbar';
+import Toolbar from '@material-ui/core/Toolbar';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import './App.css';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    content: {
+      flexGrow: 1,
+    },
+    inner: {
+      paddingTop: '24px',
+      paddingBottom: '40px',
+    },
+    table: {
+      minWidth: 650,
+    },
+  })
+);
+
 function App() {
+  const classes = useStyles();
   const { theme, toggleDarkMode } = useDarkMode();
 
   const themeConfig = createMuiTheme(theme);
@@ -21,7 +39,12 @@ function App() {
 
         <Header toggleDarkMode={toggleDarkMode} />
         <Navbar />
-        <Routes />
+        <main className={classes.content}>
+          <Toolbar />
+          <div className={classes.inner}>
+            <Routes />
+          </div>
+        </main>
       </ConnectedRouter>
     </ThemeProvider>
   );

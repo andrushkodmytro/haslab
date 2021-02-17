@@ -1,15 +1,19 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import { getAccountRequest, getAccountRequestSuccess, getAccountRequestFail } from 'page/Account/accountReducer';
-import { getAccountApi } from 'requests/account';
+import {
+  createProductRequest,
+  createProductRequestSuccess,
+  createProductRequestFail,
+} from 'page/ProductCreate/productCreateReducer';
+import { createProductApi } from './productCreateApi';
 
-export function* getAccount() {
+export function* createProduct({ payload }: any) {
   try {
-    const response = yield call(getAccountApi);
+    yield call(createProductApi, payload);
 
-    yield put(getAccountRequestSuccess(response.data));
+    yield put(createProductRequestSuccess());
   } catch (error) {
-    yield put(getAccountRequestFail());
+    yield put(createProductRequestFail());
   }
 }
 
-export default all([takeLatest(getAccountRequest().type, getAccount)]);
+export default all([takeLatest(createProductRequest('').type, createProduct)]);

@@ -1,6 +1,6 @@
 import service from 'requests/services';
 import { API_URL } from 'config';
 
-export const getAccountApi = () => {
-  return service.get(`${API_URL}/account`);
+export const createProductApi = (data: any) => {
+  return service.post(`${API_URL}/products`, data);
 };

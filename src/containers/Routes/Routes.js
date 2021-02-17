@@ -6,7 +6,7 @@ import Account from 'page/Account';
 import Search from 'page/Search';
 import Company from 'page/Company';
 import CompanyCreate from 'page/CompanyCreate';
-import ProductCreate from 'page/ProductCreate';
+import ProductCreate from 'page/ProductCreate/ProductCreate';
 import ProductsPreview from 'page/ProductsPreview';
 import OrderCreate from 'page/OrderCreate';
 import OrdersPreview from 'page/OrdersPreview';
@@ -21,8 +21,8 @@ export default function Routes() {
       <PrivateRoute path='/search' component={Search} />
       <PrivateRoute exact path='/company' component={Company} />
       <PrivateRoute exact path='/company/new' component={CompanyCreate} />
-      <PrivateRoute path='/products' component={ProductsPreview} />
-      <PrivateRoute path='/products/new' component={ProductCreate} />
+      <PrivateRoute exact path='/products' component={ProductsPreview} />
+      <PrivateRoute exact path='/products/new' component={ProductCreate} />
       <PrivateRoute exact path='/orders' component={OrdersPreview} />
       <PrivateRoute exact path='/orders/new' component={OrderCreate} />
     </Switch>

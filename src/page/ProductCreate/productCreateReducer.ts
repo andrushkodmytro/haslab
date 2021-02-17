@@ -4,31 +4,33 @@ export interface initialStateType {
   firstName: string;
   // lastName: string;
   // email: string;
-  loading: boolean;
+  isFirstLoad: boolean;
+  isLoading: boolean;
 }
 
 const initialState = {
   // firstName: '',
   // lastName: '',
   // email: '',
-  loading: false,
+  isFirstLoad: false,
+  isLoading: false,
 };
 
 const counterSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
-    getAccountRequest: (state) => {
-      state.loading = true;
+    createProductRequest: (state, { payload }) => {
+      state.isLoading = true;
     },
-    getAccountRequestSuccess: (state, { payload }) => {
-      state.loading = false;
+    createProductRequestSuccess: (state) => {
+      state.isLoading = false;
     },
-    getAccountRequestFail: (state) => {
-      state.loading = false;
+    createProductRequestFail: (state) => {
+      state.isLoading = false;
     },
   },
 });
 
 export const { reducer } = counterSlice;
-export const { getAccountRequest, getAccountRequestSuccess, getAccountRequestFail } = counterSlice.actions;
+export const { createProductRequest, createProductRequestSuccess, createProductRequestFail } = counterSlice.actions;
