@@ -10,6 +10,7 @@ import ProductCreate from 'page/ProductCreate/ProductCreate';
 import ProductsPreview from 'page/ProductsPreview';
 import OrderCreate from 'page/OrderCreate';
 import OrdersPreview from 'page/OrdersPreview';
+import Landing from 'page/Landing';
 import { PrivateRoute } from 'components/PrivateRoute';
 
 export default function Routes() {

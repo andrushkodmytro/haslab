@@ -34,4 +34,9 @@ const counterSlice = createSlice({
 });
 
 export const { reducer } = counterSlice;
-export const { createProductRequest, createProductRequestSuccess, createProductRequestFail,resetCreateProductPage } = counterSlice.actions;
+export const {
+  createProductRequest,
+  createProductRequestSuccess,
+  createProductRequestFail,
+  resetCreateProductPage,
+} = counterSlice.actions;

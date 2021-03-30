@@ -6,14 +6,14 @@ import {
 } from 'page/ProductsPreview/productsPreviewReducer';
 import { getAllProductsApi } from './productsPreviewApi';
 
-export function* getAllProducts() {
+export function* getAllProducts({ payload }: any) {
   try {
-    const response = yield call(getAllProductsApi);
+    const { data } = yield call(getAllProductsApi, payload);
 
-    yield put(getAllProductsRequestSuccess(response.data.data));
+    yield put(getAllProductsRequestSuccess(data));
   } catch (error) {
     yield put(getAllProductsRequestFail());
   }
 }
 
-export default all([takeLatest(getAllProductsRequest().type, getAllProducts)]);
+export default all([takeLatest(getAllProductsRequest({}).type, getAllProducts)]);

@@ -13,6 +13,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useHistory } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 const drawerWidth = 240;
 
@@ -85,6 +87,15 @@ export default function Navbar() {
       <Toolbar />
       <Divider />
       <List>
+        <ListItem button onClick={orderHandler}>
+          <Avatar>N</Avatar>
+          <div>
+            <p>Jane Rotanson</p>
+            <p>Admin</p>
+          </div>
+        </ListItem>
+        <Divider />
+        <ListSubheader>General</ListSubheader>
         <ListItem button onClick={productHandler}>
           <ListItemIcon>
             <ShoppingCartIcon />

@@ -1,33 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface initialStateType {
-  products: { data: [] | any[] };
+  products: any;
+  totalPages: any;
+  page: number;
   isFirstLoading: boolean;
   isLoading: boolean;
 }
 
 const initialState = {
-  products: {
-    data: [],
-  },
+  products: [],
+  totalPages: 0,
+  page: 1,
   isFirstLoading: false,
   isLoading: false,
 };
 
 const counterSlice = createSlice({
-  name: 'registration',
+  name: 'productsPreview',
   initialState,
   reducers: {
     resetProductPreviewPage: () => initialState,
-    getAllProductsRequest: (state) => {
+    getAllProductsRequest: (state, action?: any) => {
       state.isLoading = true;
+      state.isFirstLoading = true;
     },
-    getAllProductsRequestSuccess: (state, { payload }) => {
+    getAllProductsRequestSuccess: (state, { payload: { data, totalPages, page } }) => {
       state.isLoading = false;
-      state.products = payload;
+      state.isFirstLoading = false;
+      state.products = data;
+      state.totalPages = totalPages;
+      state.page = page;
     },
     getAllProductsRequestFail: (state) => {
       state.isLoading = false;
+      state.isFirstLoading = false;
     },
   },
 });

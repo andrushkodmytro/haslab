@@ -1,15 +1,19 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import { getAccountRequest, getAccountRequestSuccess, getAccountRequestFail } from 'page/Account/accountReducer';
-import { getAccountApi } from 'requests/account';
+import {
+  getOrdersRequest,
+  getOrdersRequestSuccess,
+  getOrdersRequestFail,
+} from 'page/OrdersPreview/ordersPreviewReducer';
+import { getOrdersApi } from 'page/OrdersPreview/ordersPreviewApi';
 
-export function* getAccount() {
+export function* getOrders() {
   try {
-    const response = yield call(getAccountApi);
+    const response = yield call(getOrdersApi);
 
-    yield put(getAccountRequestSuccess(response.data));
+    yield put(getOrdersRequestSuccess(response.data));
   } catch (error) {
-    yield put(getAccountRequestFail());
+    yield put(getOrdersRequestFail());
   }
 }
 
-export default all([takeLatest(getAccountRequest().type, getAccount)]);
+export default all([takeLatest(getOrdersRequest().type, getOrders)]);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from 'containers/Header';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Routes from './Routes/Routes';
@@ -26,11 +26,27 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function App() {
+export default function App() {
   const classes = useStyles();
   const { theme, toggleDarkMode } = useDarkMode();
 
   const themeConfig = createMuiTheme(theme);
+
+  useEffect(() => {
+    const auth = localStorage.getItem('auth');
+
+    if (auth) {
+      const {
+        user: { expiry },
+      } = JSON.parse(auth);
+
+      const date = Date.now();
+      
+      if (date > expiry) {
+        localStorage.removeItem('auth');
+      }
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={themeConfig}>
@@ -49,5 +65,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

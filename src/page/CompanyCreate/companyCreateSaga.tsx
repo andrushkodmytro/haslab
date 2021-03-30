@@ -4,7 +4,7 @@ import {
   createCompanyRequestSuccess,
   createCompanyRequestFail,
 } from 'page/CompanyCreate/companyCreateReducer';
-import { companyCreateApi } from 'requests/companyCreate';
+import { companyCreateApi } from './companyCreateApi';
 
 export function* createCompany({ payload }: any) {
   try {
