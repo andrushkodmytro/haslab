@@ -27,8 +27,26 @@ const counterSlice = createSlice({
     loginRequestError: (state) => {
       // state = state;
     },
+    logoutRequest: (state) => {},
+    logoutRequestSuccess: (state) => {
+      state.loggedIn = false;
+      state.user = null;
+      state.loading = false;
+    },
+    logoutRequestError: (state) => {
+      state.loggedIn = false;
+      state.user = null;
+      state.loading = false;
+    },
   },
 });
 
 export const { reducer } = counterSlice;
-export const { loginRequest, loginRequestSuccess, loginRequestError } = counterSlice.actions;
+export const {
+  loginRequest,
+  loginRequestSuccess,
+  loginRequestError,
+  logoutRequest,
+  logoutRequestSuccess,
+  logoutRequestError,
+} = counterSlice.actions;

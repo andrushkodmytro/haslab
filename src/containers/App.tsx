@@ -10,6 +10,12 @@ import Navbar from './Navbar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Snackbar from 'components/ui/Snackbar';
+import Auth from 'utils/auth';
+import { loginRequest } from 'page/Login/loginReducer';
+import {
+  useDispatch,
+  // useSelector
+} from 'react-redux';
 import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,25 +35,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function App() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { theme, toggleDarkMode } = useDarkMode();
 
   const themeConfig = createMuiTheme(theme);
 
   useEffect(() => {
-    const auth = localStorage.getItem('auth');
-
-    if (auth) {
-      const {
-        user: { expiry },
-      } = JSON.parse(auth);
-
-      const date = Date.now();
-
-      if (date > expiry) {
-        localStorage.removeItem('auth');
-      }
+    if (!Auth.isAuthenticated()) {
+      dispatch(loginRequest());
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={themeConfig}>

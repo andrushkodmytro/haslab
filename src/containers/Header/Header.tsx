@@ -14,6 +14,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { RootState } from 'store';
+import { useDispatch } from 'react-redux';
+import { logoutRequest } from 'page/Login/loginReducer';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -43,6 +45,7 @@ interface HeaderProps {
 }
 
 export default function Header({ toggleDarkMode }: HeaderProps) {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   let history = useHistory();
@@ -72,6 +75,7 @@ export default function Header({ toggleDarkMode }: HeaderProps) {
 
   const logOutHandler = () => {
     handleClose();
+    dispatch(logoutRequest());
   };
 
   return (
