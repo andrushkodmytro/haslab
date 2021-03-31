@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetOrderPreviewPage, getOrdersRequest } from './ordersPreviewReducer';
 import { RootState } from 'store';
 
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
@@ -40,12 +39,14 @@ export default function Product() {
     };
   }, [dispatch]);
 
-  const { orders, isFirstLoading, isLoading } = useSelector((state: RootState) => state.ordersPreview);
+  const {
+    orders,
+    //  isFirstLoading, isLoading
+  } = useSelector((state: RootState) => state.ordersPreview);
 
-  const total = (orders.data?.orderItems || []).reduce((res: number, curr: any) => {
-    // return res += curr.
-    console.log(curr)
-  }, 0);
+  // const total = (orders.data?.orderItems || []).reduce((res: number, curr: any) => {
+  //   // return res += curr.
+  // }, 0);
 
   return (
     <Container maxWidth={false}>

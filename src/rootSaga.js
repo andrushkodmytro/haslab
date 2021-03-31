@@ -8,6 +8,8 @@ import productsPreviewSaga from 'page/ProductsPreview/productsPreviewSaga';
 import orderCreateSaga from 'page/OrderCreate/orderCreateSaga';
 import ordersPreviewSaga from 'page/OrdersPreview/ordersPreviewSaga';
 import companySaga from 'page/Company/companySaga';
+import productCategoryCreateSaga from 'page/ProductCategoryCreate/productCategoryCreateSaga';
+import productCategoryPreviewSaga from 'page/ProductCategoryPreview/productCategoryPreviewSaga';
 
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
@@ -21,5 +23,7 @@ export default function* rootSaga() {
     orderCreateSaga,
     ordersPreviewSaga,
     companySaga,
+    productCategoryCreateSaga,
+    productCategoryPreviewSaga,
   ]);
 }

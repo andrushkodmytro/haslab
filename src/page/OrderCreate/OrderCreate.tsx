@@ -57,7 +57,6 @@ export default function Product() {
 
   const { products } = useSelector((state: RootState) => state.orderCreate);
 
-  console.log(products);
   const [selectProducts, setSelectProducts] = useState<any>([
     {
       _id: 'string',
@@ -67,7 +66,6 @@ export default function Product() {
   ]);
 
   const addNewProduct = () => {
-    console.log('==>');
     setSelectProducts((prev: any) => {
       const newObj = {
         _id: 'string',

@@ -8,6 +8,9 @@ import { reducer as productsPreview } from 'page/ProductsPreview/productsPreview
 import { reducer as orderCreate } from 'page/OrderCreate/orderCreateReducer';
 import { reducer as ordersPreview } from 'page/OrdersPreview/ordersPreviewReducer';
 import { reducer as company } from 'page/Company/companyReducer';
+import { reducer as productCategoryCreate } from 'page/ProductCategoryCreate/productCategoryCreateReducer';
+import { reducer as productCategoryPreview } from 'page/ProductCategoryPreview/productCategoryPreviewReducer';
+import { reducer as ui } from 'reducers/ui';
 
 export const rootReducer = (history) =>
   combineReducers({
@@ -19,5 +22,8 @@ export const rootReducer = (history) =>
     orderCreate,
     ordersPreview,
     company,
+    productCategoryCreate,
+    productCategoryPreview,
+    ui,
     router: connectRouter(history),
   });

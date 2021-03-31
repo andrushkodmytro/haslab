@@ -10,7 +10,8 @@ import ProductCreate from 'page/ProductCreate/ProductCreate';
 import ProductsPreview from 'page/ProductsPreview';
 import OrderCreate from 'page/OrderCreate';
 import OrdersPreview from 'page/OrdersPreview';
-import Landing from 'page/Landing';
+import ProductCategoryCreate from 'page/ProductCategoryCreate';
+import ProductCategoryPreview from 'page/ProductCategoryPreview';
 import { PrivateRoute } from 'components/PrivateRoute';
 
 export default function Routes() {
@@ -26,6 +27,8 @@ export default function Routes() {
       <PrivateRoute exact path='/products/new' component={ProductCreate} />
       <PrivateRoute exact path='/orders' component={OrdersPreview} />
       <PrivateRoute exact path='/orders/new' component={OrderCreate} />
+      <PrivateRoute exact path='/categories/new' component={ProductCategoryCreate} />
+      <PrivateRoute exact path='/categories' component={ProductCategoryPreview} />
     </Switch>
   );
 }

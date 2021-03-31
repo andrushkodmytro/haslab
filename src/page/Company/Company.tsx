@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCompanyRequest } from './companyReducer';
 import { RootState } from 'store';
 import Container from 'components/ui/Container/Container';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { useForm, Controller } from 'react-hook-form';
-import { EMAIL_REGEX } from 'utils/constants';
-import UploadButtons from 'components/ui/UploadsButton';
+// import { useForm, Controller } from 'react-hook-form';
+// import { EMAIL_REGEX } from 'utils/constants';
+// import UploadButtons from 'components/ui/UploadsButton';
 import Paper from '@material-ui/core/Paper';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -17,7 +17,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,7 +65,7 @@ export default function Company() {
     };
   }, [dispatch]);
 
-  const {allCompanies} = useSelector((state: RootState) => state.company);
+  const { allCompanies } = useSelector((state: RootState) => state.company);
 
   return (
     <Container maxWidth='md'>
@@ -73,7 +73,7 @@ export default function Company() {
         <Typography component='h2' variant='h5'>
           Your companies
         </Typography>
-        <Button type='submit' variant='contained' color='primary' size='large' >
+        <Button type='submit' variant='contained' color='primary' size='large'>
           Create company
         </Button>
       </div>

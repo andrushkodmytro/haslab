@@ -1,7 +1,10 @@
 import React from 'react';
 import { createCompanyRequest } from 'page/CompanyCreate/companyCreateReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store';
+import {
+  useDispatch,
+  // useSelector
+} from 'react-redux';
+// import { RootState } from 'store';
 import Container from 'components/ui/Container/Container';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +36,7 @@ export default function CompanyCreate() {
   const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
 
-  const account = useSelector((state: RootState) => state.account);
+  // const account = useSelector((state: RootState) => state.account);
 
   const companyCreateHandler = (data: any) => {
     dispatch(createCompanyRequest({ data }));

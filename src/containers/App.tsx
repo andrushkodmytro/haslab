@@ -9,6 +9,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import Navbar from './Navbar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Snackbar from 'components/ui/Snackbar';
 import './App.css';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,7 +42,7 @@ export default function App() {
       } = JSON.parse(auth);
 
       const date = Date.now();
-      
+
       if (date > expiry) {
         localStorage.removeItem('auth');
       }
@@ -52,7 +53,7 @@ export default function App() {
     <ThemeProvider theme={themeConfig}>
       <ConnectedRouter history={history}>
         <CssBaseline />
-
+        <Snackbar />
         <Header toggleDarkMode={toggleDarkMode} />
         <Navbar />
         <main className={classes.content}>
