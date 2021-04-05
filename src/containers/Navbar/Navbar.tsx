@@ -15,6 +15,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Toolbar from '@material-ui/core/Toolbar';
 import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
 
 const drawerWidth = 240;
 
@@ -48,6 +50,8 @@ export default function Navbar() {
   const classes = useStyles();
 
   let history = useHistory();
+
+  const { loggedIn } = useSelector((state: RootState) => state.signIn);
 
   const [openProducts, setOpenProducts] = React.useState(false);
   const [openOrders, setOpenOrders] = React.useState(false);
@@ -90,85 +94,89 @@ export default function Navbar() {
   };
 
   return (
-    <Drawer
-      className={classes.drawer}
-      variant='permanent'
-      classes={{
-        paper: classes.drawerPaper,
-      }}
-      anchor='left'
-    >
-      <Toolbar />
-      <Divider />
-      <List>
-        <ListItem button onClick={orderHandler}>
-          <Avatar>N</Avatar>
-          <div>
-            <p>Jane Rotanson</p>
-            <p>Admin</p>
-          </div>
-        </ListItem>
-        <Divider />
-        <ListItem button onClick={productHandler}>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary='Products' />
-          {openProducts ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openProducts} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding>
-            <ListItem button className={classes.nested} onClick={products}>
-              <ListItemText inset primary='List Products' />
+    <>
+      {loggedIn ? (
+        <Drawer
+          className={classes.drawer}
+          variant='permanent'
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor='left'
+        >
+          <Toolbar />
+          <Divider />
+          <List>
+            <ListItem button onClick={orderHandler}>
+              <Avatar>N</Avatar>
+              <div>
+                <p>Jane Rotanson</p>
+                <p>Admin</p>
+              </div>
             </ListItem>
-          </List>
-          <List component='div' disablePadding>
-            <ListItem button className={classes.nested} onClick={newProduct}>
-              <ListItemText inset primary='Create Product' />
+            <Divider />
+            <ListItem button onClick={productHandler}>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary='Products' />
+              {openProducts ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-          </List>
-        </Collapse>
+            <Collapse in={openProducts} timeout='auto' unmountOnExit>
+              <List component='div' disablePadding>
+                <ListItem button className={classes.nested} onClick={products}>
+                  <ListItemText inset primary='List Products' />
+                </ListItem>
+              </List>
+              <List component='div' disablePadding>
+                <ListItem button className={classes.nested} onClick={newProduct}>
+                  <ListItemText inset primary='Create Product' />
+                </ListItem>
+              </List>
+            </Collapse>
 
-        <ListItem button onClick={categoryHandler}>
-          <ListItemIcon>
-            <BallotIcon />
-          </ListItemIcon>
-          <ListItemText primary='Categories' />
-          {openCategories ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openCategories} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding>
-            <ListItem button className={classes.nested} onClick={category}>
-              <ListItemText inset primary='List Categories' />
+            <ListItem button onClick={categoryHandler}>
+              <ListItemIcon>
+                <BallotIcon />
+              </ListItemIcon>
+              <ListItemText primary='Categories' />
+              {openCategories ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
-          </List>
-          <List component='div' disablePadding>
-            <ListItem button className={classes.nested} onClick={newCategory}>
-              <ListItemText inset primary='Create Category' />
-            </ListItem>
-          </List>
-        </Collapse>
+            <Collapse in={openCategories} timeout='auto' unmountOnExit>
+              <List component='div' disablePadding>
+                <ListItem button className={classes.nested} onClick={category}>
+                  <ListItemText inset primary='List Categories' />
+                </ListItem>
+              </List>
+              <List component='div' disablePadding>
+                <ListItem button className={classes.nested} onClick={newCategory}>
+                  <ListItemText inset primary='Create Category' />
+                </ListItem>
+              </List>
+            </Collapse>
 
-        <ListItem button onClick={orderHandler}>
-          <ListItemIcon>
-            <ListAltIcon />
-          </ListItemIcon>
-          <ListItemText primary='Orders' />
-          {openOrders ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openOrders} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding>
-            <ListItem button className={classes.nested} onClick={orders}>
-              <ListItemText inset primary='List Orders' />
+            <ListItem button onClick={orderHandler}>
+              <ListItemIcon>
+                <ListAltIcon />
+              </ListItemIcon>
+              <ListItemText primary='Orders' />
+              {openOrders ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
+            <Collapse in={openOrders} timeout='auto' unmountOnExit>
+              <List component='div' disablePadding>
+                <ListItem button className={classes.nested} onClick={orders}>
+                  <ListItemText inset primary='List Orders' />
+                </ListItem>
+              </List>
+              <List component='div' disablePadding>
+                <ListItem button className={classes.nested} onClick={newOrders}>
+                  <ListItemText inset primary='Create Order' />
+                </ListItem>
+              </List>
+            </Collapse>
           </List>
-          <List component='div' disablePadding>
-            <ListItem button className={classes.nested} onClick={newOrders}>
-              <ListItemText inset primary='Create Order' />
-            </ListItem>
-          </List>
-        </Collapse>
-      </List>
-    </Drawer>
+        </Drawer>
+      ) : null}
+    </>
   );
 }

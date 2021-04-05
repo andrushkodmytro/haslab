@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Data {
   name: string;
-  unit: string;
+  categoryId: string;
   price: number;
   description: string;
   createdAt: number;
@@ -112,7 +112,7 @@ export default function Product() {
                     <TableCell component='th' scope='row'>
                       {row.name}
                     </TableCell>
-                    <TableCell align='right'>{row.unit}</TableCell>
+                    <TableCell align='right'>{row.categoryId}</TableCell>
                     <TableCell align='right'>{(row.price || 0) / 100}</TableCell>
                     <TableCell align='right'>{row.description}</TableCell>
                     <TableCell align='right'>{row.createdAt}</TableCell>

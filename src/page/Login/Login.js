@@ -35,9 +35,13 @@ export default function Login() {
   const loginHandler = (e) => {
     e.preventDefault();
 
-    const { email, password } = e.target;
+    const { email, password, remember } = e.target;
 
-    const data = { email: email.value, password: password.value };
+    let data = { email: email.value, password: password.value };
+
+    if (remember.checked) {
+      data.remember = true;
+    }
 
     const { from } = location.state || { from: { pathname: '/' } };
     dispatch(loginRequest({ data, from }));
@@ -67,7 +71,7 @@ export default function Login() {
           variant='outlined'
         />
 
-        <FormControlLabel control={<Checkbox value='remember' color='primary' />} label='Remember me' />
+        <FormControlLabel control={<Checkbox value='remember' name='remember' color='primary' />} label='Remember me' />
         <Button type='submit' className={classes.submit} fullWidth variant='contained' color='primary' size='large'>
           Submit
         </Button>

@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Snackbar from 'components/ui/Snackbar';
 import Auth from 'utils/auth';
-import { loginRequest } from 'page/Login/loginReducer';
+import { logoutRequest } from 'page/Login/loginReducer';
 import {
   useDispatch,
   // useSelector
@@ -42,7 +42,7 @@ export default function App() {
 
   useEffect(() => {
     if (!Auth.isAuthenticated()) {
-      dispatch(loginRequest());
+      dispatch(logoutRequest());
     }
   }, [dispatch]);
 
@@ -52,7 +52,9 @@ export default function App() {
         <CssBaseline />
         <Snackbar />
         <Header toggleDarkMode={toggleDarkMode} />
+
         <Navbar />
+
         <main className={classes.content}>
           <Toolbar />
           <div className={classes.inner}>

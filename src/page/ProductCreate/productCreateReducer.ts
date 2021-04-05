@@ -1,17 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ICategory } from './interfaces';
 
 export interface initialStateType {
-  firstName: string;
-  // lastName: string;
-  // email: string;
+  categories: ICategory[] | [];
   isFirstLoad: boolean;
   isLoading: boolean;
 }
 
 const initialState = {
-  // firstName: '',
-  // lastName: '',
-  // email: '',
+  categories: [],
   isFirstLoad: false,
   isLoading: false,
 };
@@ -20,6 +17,16 @@ const counterSlice = createSlice({
   name: 'registration',
   initialState,
   reducers: {
+    getProductCategoryRequest: (state) => {
+      state.isFirstLoad = true;
+    },
+    getProductCategoryRequestSuccess: (state, { payload }) => {
+      state.categories = payload;
+      state.isFirstLoad = false;
+    },
+    getProductCategoryRequestFail: (state) => {
+      state.isFirstLoad = false;
+    },
     createProductRequest: (state, { payload }) => {
       state.isLoading = true;
     },
@@ -35,8 +42,11 @@ const counterSlice = createSlice({
 
 export const { reducer } = counterSlice;
 export const {
+  resetCreateProductPage,
   createProductRequest,
   createProductRequestSuccess,
   createProductRequestFail,
-  resetCreateProductPage,
+  getProductCategoryRequest,
+  getProductCategoryRequestSuccess,
+  getProductCategoryRequestFail,
 } = counterSlice.actions;

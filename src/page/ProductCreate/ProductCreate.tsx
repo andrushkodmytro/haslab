@@ -7,9 +7,13 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 // import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import { createProductRequest, resetCreateProductPage } from './productCreateReducer';
-import { useDispatch } from 'react-redux';
+import { resetCreateProductPage, createProductRequest, getProductCategoryRequest } from './productCreateReducer';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+// import Autocomplete from 'components/ui/Autocomplete';
+import { RootState } from 'store';
+import { ICategory } from './interfaces';
 
 const useStyles = makeStyles((theme) => ({
   loginPage: {
@@ -36,7 +40,12 @@ export default function ProductCreate() {
 
   const dispatch = useDispatch();
 
+  const { categories } = useSelector((state: RootState) => state.productCreate);
+
+  console.log(categories);
+
   useEffect(() => {
+    dispatch(getProductCategoryRequest());
     return () => {
       dispatch(resetCreateProductPage());
     };
@@ -44,13 +53,11 @@ export default function ProductCreate() {
 
   const { handleSubmit, control, errors } = useForm();
 
-  const onSubmit = (data: any) => {
-    const x = localStorage.getItem('auth');
-    const companyId = x ? JSON.parse(x)?.user?.companyId : null;
-    dispatch(createProductRequest({ ...data, companyId }));
+  const onSubmit = ({ name, description, price, category }: any) => {
+    dispatch(createProductRequest({ name, description, price, categoryId: category._id }));
   };
 
-  const { name: nameError, price: priceError, description: descriptionError, unit: unitError } = errors;
+  const { name: nameError, category: categoryError, price: priceError, description: descriptionError } = errors;
   return (
     <Container maxWidth='sm'>
       <Typography component='h1' variant='h5'>
@@ -74,6 +81,35 @@ export default function ProductCreate() {
                 autoFocus
                 error={!!nameError}
                 helperText={!!nameError && nameError?.message}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                render={(props) => (
+                  <Autocomplete
+                    {...props}
+                    options={categories}
+                    getOptionLabel={(option: ICategory) => option.name}
+                    getOptionSelected={(option: ICategory, value: ICategory) => {
+                      return option.name === value.name;
+                    }}
+                    renderInput={(params: any) => (
+                      <TextField
+                        {...params}
+                        label='Choose a country'
+                        variant='outlined'
+                        error={!!categoryError}
+                        helperText={!!categoryError && categoryError?.message}
+                      />
+                    )}
+                    onChange={(_: any, data: any) => props.onChange(data)}
+                  />
+                )}
+                rules={{ required: { value: true, message: 'Category is required' } }}
+                name='category'
+                control={control}
+                defaultValue={null}
               />
             </Grid>
 
@@ -106,22 +142,6 @@ export default function ProductCreate() {
                 label='Description'
                 error={!!descriptionError}
                 helperText={!!descriptionError && descriptionError?.message}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Controller
-                as={TextField}
-                control={control}
-                // rules={{ required: { value: true, message: 'Unit name is required' } }}
-                defaultValue=''
-                name='unit'
-                variant='outlined'
-                // required
-                fullWidth
-                label='Unit'
-                error={!!unitError}
-                helperText={!!unitError && unitError?.message}
               />
             </Grid>
           </Grid>

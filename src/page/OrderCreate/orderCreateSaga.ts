@@ -1,6 +1,7 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
 import { getCreateOrderRequest, getCreateOrderRequestSuccess, getCreateOrderRequestFail } from './orderCreateReducer';
 import { getCreateOrderApi } from './orderCreateApi';
+// import { snackbarSuccess } from 'reducers/ui';
 
 export function* getCreateOrder() {
   try {
@@ -11,5 +12,7 @@ export function* getCreateOrder() {
     yield put(getCreateOrderRequestFail());
   }
 }
+
+// yield put(snackbarSuccess('Product successfully created!'));
 
 export default all([takeLatest(getCreateOrderRequest().type, getCreateOrder)]);
