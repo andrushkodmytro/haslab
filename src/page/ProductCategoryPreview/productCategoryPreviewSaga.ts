@@ -1,19 +1,19 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
 import {
-  getAllProductsRequest,
-  getAllProductsRequestSuccess,
-  getAllProductsRequestFail,
-} from 'page/ProductsPreview/productsPreviewReducer';
-import { getAllProductsApi } from './productCategoryPreview Api';
+  getProductCategoriesRequest,
+  getProductCategoriesRequestSuccess,
+  getProductCategoriesRequestFail,
+} from './productCategoryPreviewReducer';
+import { getProductCategoriesApi } from './productCategoryPreviewApi';
 
-export function* getAllProducts({ payload }: any) {
+export function* getProductCategories({ payload }: any) {
   try {
-    const { data } = yield call(getAllProductsApi, payload);
+    const { data } = yield call(getProductCategoriesApi, payload);
 
-    yield put(getAllProductsRequestSuccess(data));
+    yield put(getProductCategoriesRequestSuccess(data));
   } catch (error) {
-    yield put(getAllProductsRequestFail());
+    yield put(getProductCategoriesRequestFail());
   }
 }
 
-export default all([takeLatest(getAllProductsRequest({}).type, getAllProducts)]);
+export default all([takeLatest(getProductCategoriesRequest({}).type, getProductCategories)]);

@@ -96,7 +96,7 @@ export default function Product() {
   return (
     <Container maxWidth={false}>
       <Typography component='h1' variant='h5'>
-        {isFirstLoading ? <Skeleton /> : 'ProductsPreview'}
+        {isFirstLoading ? <Skeleton /> : 'Products List'}
       </Typography>
 
       {isFirstLoading ? (

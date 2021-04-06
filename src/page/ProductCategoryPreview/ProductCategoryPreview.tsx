@@ -9,7 +9,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetProductPreviewPage, getAllProductsRequest } from './productCategoryPreviewReducer';
+import { resetProductCategoriesPage, getProductCategoriesRequest } from './productCategoryPreviewReducer';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { RootState } from 'store';
 import TablePagination from '@material-ui/core/TablePagination';
@@ -41,8 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Data {
   name: string;
-  unit: string;
-  price: number;
   description: string;
   createdAt: number;
   updatedAt: number;
@@ -60,29 +58,29 @@ export default function Product() {
   const [orderBy, setOrderBy] = React.useState<keyof Data>('name');
 
   const {
-    products,
+    categories,
     totalPages,
     //  isLoading,
     isFirstLoading,
-  } = useSelector((state: RootState) => state.productsPreview);
+  } = useSelector((state: RootState) => state.productCategoryPreview);
 
   useEffect(() => {
-    dispatch(getAllProductsRequest({ page: page + 1, limit }));
+    dispatch(getProductCategoriesRequest({ page: page + 1, limit }));
 
     return () => {
-      dispatch(resetProductPreviewPage());
+      dispatch(resetProductCategoriesPage());
     };
   }, [dispatch, page, limit]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
-    dispatch(getAllProductsRequest({ page: newPage + 1, limit }));
+    dispatch(getProductCategoriesRequest({ page: newPage + 1, limit }));
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLimit(parseInt(event.target.value, 10));
     setPage(0);
-    dispatch(getAllProductsRequest({ page: 1, limit: event.target.value }));
+    dispatch(getProductCategoriesRequest({ page: 1, limit: event.target.value }));
   };
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
@@ -90,30 +88,29 @@ export default function Product() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
 
-    dispatch(getAllProductsRequest({ page: page + 1, limit, sortBy: property, orderBy: isAsc ? 'desc' : 'asc' }));
+    dispatch(getProductCategoriesRequest({ page: page + 1, limit, sortBy: property, orderBy: isAsc ? 'desc' : 'asc' }));
   };
 
   return (
     <Container maxWidth={false}>
       <Typography component='h1' variant='h5'>
-        {isFirstLoading ? <Skeleton /> : 'ProductsPreview'}
+        {isFirstLoading ? <Skeleton /> : 'Product Categories'}
       </Typography>
 
       {isFirstLoading ? (
         <Skeleton />
-      ) : products.length ? (
+      ) : categories.length ? (
         <>
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label='simple table'>
               <EnhancedTableProps order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
               <TableBody>
-                {products.map((row: any) => (
+                {categories.map((row: any) => (
                   <TableRow key={row._id}>
                     <TableCell component='th' scope='row'>
                       {row.name}
                     </TableCell>
-                    <TableCell align='right'>{row.unit}</TableCell>
-                    <TableCell align='right'>{(row.price || 0) / 100}</TableCell>
+
                     <TableCell align='right'>{row.description}</TableCell>
                     <TableCell align='right'>{row.createdAt}</TableCell>
                     <TableCell align='right'>{row.updatedAt}</TableCell>

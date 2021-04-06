@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface initialStateType {
-  products: any;
+  categories: any;
   totalPages: any;
   page: number;
   isFirstLoading: boolean;
@@ -9,7 +9,7 @@ export interface initialStateType {
 }
 
 const initialState = {
-  products: [],
+  categories: [],
   totalPages: 0,
   page: 1,
   isFirstLoading: false,
@@ -17,22 +17,22 @@ const initialState = {
 };
 
 const counterSlice = createSlice({
-  name: 'productsPreview',
+  name: 'categoriesPreview',
   initialState,
   reducers: {
-    resetProductPreviewPage: () => initialState,
-    getAllProductsRequest: (state, action?: any) => {
+    resetProductCategoriesPage: () => initialState,
+    getProductCategoriesRequest: (state, action?: any) => {
       state.isLoading = true;
       state.isFirstLoading = true;
     },
-    getAllProductsRequestSuccess: (state, { payload: { data, totalPages, page } }) => {
+    getProductCategoriesRequestSuccess: (state, { payload: { data, totalPages, page } }) => {
       state.isLoading = false;
       state.isFirstLoading = false;
-      state.products = data;
+      state.categories = data;
       state.totalPages = totalPages;
       state.page = page;
     },
-    getAllProductsRequestFail: (state) => {
+    getProductCategoriesRequestFail: (state) => {
       state.isLoading = false;
       state.isFirstLoading = false;
     },
@@ -41,8 +41,8 @@ const counterSlice = createSlice({
 
 export const { reducer } = counterSlice;
 export const {
-  resetProductPreviewPage,
-  getAllProductsRequest,
-  getAllProductsRequestSuccess,
-  getAllProductsRequestFail,
+  resetProductCategoriesPage,
+  getProductCategoriesRequest,
+  getProductCategoriesRequestSuccess,
+  getProductCategoriesRequestFail,
 } = counterSlice.actions;

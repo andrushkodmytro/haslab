@@ -23,8 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Data {
   name: string;
-  unit: string;
-  price: number;
   description: string;
   createdAt: number;
   updatedAt: number;
@@ -47,8 +45,6 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Product name' },
-  { id: 'unit', numeric: true, disablePadding: false, label: 'Unit' },
-  { id: 'price', numeric: true, disablePadding: false, label: 'Price' },
   { id: 'description', numeric: true, disablePadding: false, label: 'Description' },
   { id: 'createdAt', numeric: true, disablePadding: false, label: 'Create date' },
   { id: 'updatedAt', numeric: true, disablePadding: false, label: 'Update date' },
